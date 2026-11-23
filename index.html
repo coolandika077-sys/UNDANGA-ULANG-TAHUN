@@ -258,13 +258,11 @@
           <p class="text-xs text-gray-500 mt-1">Dias Azzahra</p>
 
           <!-- WADAH POP-UP / TAMPILAN GAMBAR QR CODE DANA -->
-          <div id="qr-dana-container" class="hidden mt-4 pt-4 border-t border-[#c59b6b]/20 text-center transition-all">
+          <div id="qr-dana-container" style="display: none;" class="mt-4 pt-4 border-t border-[#c59b6b]/20 text-center">
             <p class="text-[11px] text-gray-600 mb-2 font-medium">Scan QR DANA di bawah ini untuk transfer:</p>
             <div class="inline-block p-2.5 bg-white rounded-2xl shadow-md border border-[#c59b6b]/30">
-              <!-- Jika foto image/qr-dana.jpeg belum ada, otomatis muncul preview QR sementara -->
               <img id="qr-dana-img" 
                    src="image/qr-dana.jpeg" 
-                   onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://link.dana.id/qr/081234567890';" 
                    alt="QR Code DANA Dias Azzahra" 
                    class="w-48 h-48 object-contain rounded-xl mx-auto">
             </div>
@@ -372,7 +370,19 @@
   </div>
 
   <!-- SCRIPT PENDUKUNG -->
+  <script>
+    // Fungsi Toggle QR Code DANA (Langsung di HTML agar tidak terhalang cache browser)
+    function toggleQRDana() {
+      var wadah = document.getElementById('qr-dana-container');
+      if (!wadah) return;
+      if (wadah.style.display === 'none' || wadah.style.display === '') {
+        wadah.style.display = 'block';
+      } else {
+        wadah.style.display = 'none';
+      }
+    }
+  </script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js?v=2"></script>
 </body>
 </html>
