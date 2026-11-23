@@ -371,7 +371,6 @@
 
   <!-- SCRIPT PENDUKUNG -->
   <script>
-    // Fungsi Toggle QR Code DANA (Langsung di HTML agar tidak terhalang cache browser)
     function toggleQRDana() {
       var wadah = document.getElementById('qr-dana-container');
       if (!wadah) return;
@@ -381,8 +380,9 @@
         wadah.style.display = 'none';
       }
     }
+    window.toggleQRDana = toggleQRDana;
   </script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="script.js?v=2"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>

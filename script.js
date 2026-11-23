@@ -160,8 +160,11 @@ document.addEventListener("DOMContentLoaded", function () {
   // Fungsi Toggle Buka / Tutup QR Code DANA
   window.toggleQRDana = function () {
     const wadahQR = document.getElementById("qr-dana-container");
-    if (wadahQR) {
-      wadahQR.classList.toggle("hidden");
+    if (!wadahQR) return;
+    if (wadahQR.style.display === "none" || wadahQR.style.display === "") {
+      wadahQR.style.display = "block";
+    } else {
+      wadahQR.style.display = "none";
     }
   };
 
