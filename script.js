@@ -157,6 +157,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   };
 
+  // Fungsi Toggle Buka / Tutup QR Code DANA
+  window.toggleQRDana = function () {
+    const wadahQR = document.getElementById("qr-dana-container");
+    if (wadahQR) {
+      wadahQR.classList.toggle("hidden");
+    }
+  };
+
   // Fungsi menampilkan kotak pesan hitam di bawah layar
   function tampilkanPemberitahuan(pesan) {
     const kotakPemberitahuan = document.getElementById("copy-toast");
