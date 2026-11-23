@@ -90,8 +90,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // ========================================================================
   // BAGIAN 3: HITUNG MUNDUR (COUNTDOWN TIMER REAL-TIME)
   // ========================================================================
-  // Ganti tanggal acara di bawah ini (Bulan Tanggal, Tahun Jam:Menit:Detik)
-  const waktuAcara = new Date("December 31, 2026 16:00:00").getTime();
+  // Tanggal acara: 16 Januari (Pukul 16:00:00 WIB)
+  const waktuAcara = new Date("January 16, 2027 16:00:00").getTime();
 
   function jalankanHitungMundur() {
     const waktuSekarang = new Date().getTime();
@@ -130,12 +130,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const tombolKalender = document.getElementById("btn-save-calendar");
   if (tombolKalender) {
     tombolKalender.addEventListener("click", function () {
-      const judul = encodeURIComponent("Ulang Tahun Alya Rahmania");
-      const info = encodeURIComponent("Perayaan Ulang Tahun Sweet Seventeen di Grand Garden Resto.");
+      const judul = encodeURIComponent("Ulang Tahun ke-23 Dias Azzahra");
+      const info = encodeURIComponent("Perayaan Ulang Tahun ke-23 Dias Azzahra di Grand Garden Resto.");
       const lokasi = encodeURIComponent("Grand Garden Cafe & Resto, Jakarta Selatan");
       
-      // Format Tanggal: YYYYMMDDTHHmmssZ
-      const linkGoogleCalendar = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${judul}&dates=20261231T090000Z/20261231T140000Z&details=${info}&location=${lokasi}`;
+      // Format Tanggal: YYYYMMDDTHHmmssZ (16 Januari)
+      const linkGoogleCalendar = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${judul}&dates=20270116T090000Z/20270116T140000Z&details=${info}&location=${lokasi}`;
       
       // Buka halaman Google Calendar di tab baru
       window.open(linkGoogleCalendar, "_blank");
@@ -187,13 +187,13 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       nama: "Rizky Pratama",
       status: "Hadir",
-      pesan: "Selamat ulang tahun yang ke-17! Semoga makin sukses dan ceria selalu ya 🎉",
+      pesan: "Selamat ulang tahun yang ke-23 Dias! Semoga makin sukses, berkah usianya, dan ceria selalu ya 🎉",
       waktu: "1 jam lalu"
     },
     {
       nama: "Nabila Aurelia",
       status: "Hadir",
-      pesan: "Happy Sweet Seventeen bestie! Can't wait to celebrate with you! 💖🎂",
+      pesan: "Happy 23rd Birthday Dias! Can't wait to celebrate with you! 💖🎂",
       waktu: "3 jam lalu"
     }
   ];
