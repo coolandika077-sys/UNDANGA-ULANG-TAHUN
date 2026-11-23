@@ -1,0 +1,119 @@
+/* ========================================================
+   STYLE.CSS - DIGITAL BIRTHDAY INVITATION
+   Tema: Elegant Champagne & Rose Pastel
+   ======================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary: #c59b6b;
+  --primary-light: #e8d7c3;
+  --primary-dark: #8c6738;
+  --bg-creamy: #fdfbf7;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --text-main: #332f2c;
+  --text-muted: #746f68;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--text-main);
+  background-color: #2b2725; /* Background kontras di desktop */
+}
+
+/* Kustom Font */
+.font-serif-title {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-script {
+  font-family: 'Great Vibes', cursive;
+}
+
+/* Pembungkus Frame Mobile untuk tampilan estetis responsif */
+.app-container {
+  max-width: 480px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background-color: var(--bg-creamy);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism Effect */
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(197, 155, 107, 0.25);
+  box-shadow: 0 10px 25px -5px rgba(140, 103, 56, 0.08);
+}
+
+/* Animasi Putaran Piringan Musik */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-disc {
+  animation: spin-slow 4s linear infinite;
+}
+
+/* Animasi Denyut Halus untuk Tombol Cover */
+@keyframes pulse-subtle {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(197, 155, 107, 0.3);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 8px 25px rgba(197, 155, 107, 0.5);
+  }
+}
+
+.pulse-button {
+  animation: pulse-subtle 2.5s infinite ease-in-out;
+}
+
+/* Toast Notifikasi Salin */
+#copy-toast {
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform: translateY(100px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+#copy-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Transisi Buka Sampul */
+#cover-screen {
+  transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease-in-out;
+}
+
+#cover-screen.opened {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #f1ede6;
+}
+::-webkit-scrollbar-thumb {
+  background: #c59b6b;
+  border-radius: 4px;
+}

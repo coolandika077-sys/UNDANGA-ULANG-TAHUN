@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan Ulang Tahun Digital</title>
+
+  <!-- Tailwind CSS CDN (Untuk mempermudah styling warna dan ukuran) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- AOS (Library animasi saat halaman di-scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <!-- Efek Kembang Api Kertas (Canvas Confetti) -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- CSS Custom buatan kita -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#211e1c] antialiased overflow-hidden" id="body-root">
+
+  <!-- =====================================================================
+       FITUR 1: COVER DEPAN / HERO COVER (SAMPUL AWAL)
+       ===================================================================== -->
+  <section id="cover-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-[#fdfbf7] p-6 text-center shadow-2xl">
+    <div class="max-w-md w-full py-10 px-6 rounded-3xl border border-[#c59b6b]/30 bg-white/70 backdrop-blur-md shadow-xl flex flex-col items-center">
+      
+      <p class="text-xs uppercase tracking-[0.25em] text-[#936c3a] font-semibold mb-2">You're Cordially Invited To</p>
+      <h3 class="font-script text-3xl text-[#c59b6b] mb-1">Sweet Seventeen & Birthday Party</h3>
+      
+      <!-- ✏️ EDIT 1: GANTI NAMA ANDA DI SINI -->
+      <h1 class="font-serif-title text-4xl sm:text-5xl font-bold text-[#2c2725] my-3">Dias Azzahra</h1>
+      
+      <!-- ✏️ EDIT 2: GANTI FOTO COVER DI SINI -->
+      <div class="my-6 relative">
+        <div class="w-36 h-36 rounded-full p-1 border-2 border-dashed border-[#c59b6b]">
+          <img src="image/WhatsApp Image 2026-11-23 at 09.09.40 (1).jpeg" 
+               alt="Foto Dias" 
+               class="w-full h-full object-cover rounded-full shadow-md">
+        </div>
+        <span class="absolute -bottom-2 right-4 bg-[#c59b6b] text-white text-[11px] font-bold px-3 py-1 rounded-full shadow">
+          17th
+        </span>
+      </div>
+
+      <!-- KOTAK NAMA TAMU OTOMATIS DARI URL (?to=Nama+Tamu) -->
+      <div class="w-full bg-[#f6efe7] border border-[#e2d5c3] py-3 px-4 rounded-2xl mb-6">
+        <p class="text-xs text-[#746f68] mb-1">Kepada Yth. Sahabat/Keluarga:</p>
+        <h4 id="guest-name-cover" class="text-lg font-bold text-[#2c2725] capitalize">Tamu Undangan</h4>
+        <span class="text-[11px] text-[#936c3a] italic">*Spesial diundang ke acara ini</span>
+      </div>
+
+      <!-- TOMBOL BUKA UNDANGAN -->
+      <button id="btn-open-invitation" class="pulse-button inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-[#c59b6b] to-[#936c3a] text-white font-semibold text-sm rounded-full shadow-lg hover:brightness-110 active:scale-95 transition-all">
+        <i class="fa-solid fa-envelope-open-text text-base"></i>
+        <span>Buka Undangan</span>
+      </button>
+    </div>
+  </section>
+
+
+  <!-- =====================================================================
+       KONTEN UTAMA WEBSITE (FRAME HP / MOBILE-FIRST)
+       ===================================================================== -->
+  <main class="app-container">
+
+    <!-- HEADER / SAMBUTAN -->
+    <header class="pt-12 pb-14 px-6 text-center bg-gradient-to-b from-[#f9f4ec] to-[#fdfbf7]">
+      <span class="inline-block px-4 py-1.5 rounded-full bg-[#c59b6b]/15 text-[#936c3a] text-xs font-semibold tracking-wider uppercase mb-3">
+        The Birthday Celebration
+      </span>
+      <h1 class="font-serif-title text-3xl font-bold text-[#2c2725]">Dias Azzahra</h1>
+      <p class="font-script text-2xl text-[#c59b6b] mt-1">Turning 17 & Grateful</p>
+
+      <!-- KUTIPAN KATA-KATA BIJAK -->
+      <div class="mt-6 px-4" data-aos="fade-up">
+        <div class="glass-card p-5 rounded-2xl relative">
+          <p class="text-xs sm:text-sm text-[#5a544e] italic leading-relaxed">
+            "Hitunglah umurmu dari tawa dan senyuman, bukan dari air mata. Terima kasih telah menjadi bagian indah dalam hidupku."
+          </p>
+        </div>
+      </div>
+    </header>
+
+
+    <!-- =====================================================================
+         FITUR 2: HITUNG MUNDUR (COUNTDOWN TIMER) & KALENDER
+         ===================================================================== -->
+    <section class="py-10 px-6">
+      <div class="text-center mb-6" data-aos="fade-up">
+        <h2 class="font-serif-title text-2xl font-bold text-[#2c2725]">Menghitung Hari</h2>
+        <div class="w-12 h-0.5 bg-[#c59b6b] mx-auto mt-2 mb-3"></div>
+        <p class="text-xs text-[#746f68]">Menuju hari bahagia perayaan ulang tahun.</p>
+      </div>
+
+      <!-- KOTAK 4 ANGKA COUNTDOWN -->
+      <div class="grid grid-cols-4 gap-2 text-center mb-6" data-aos="zoom-in">
+        <div class="glass-card py-3 px-2 rounded-2xl border border-[#c59b6b]/30">
+          <span id="countdown-days" class="block font-serif-title text-2xl font-bold text-[#936c3a]">00</span>
+          <span class="text-[10px] uppercase font-semibold text-[#746f68]">Hari</span>
+        </div>
+        <div class="glass-card py-3 px-2 rounded-2xl border border-[#c59b6b]/30">
+          <span id="countdown-hours" class="block font-serif-title text-2xl font-bold text-[#936c3a]">00</span>
+          <span class="text-[10px] uppercase font-semibold text-[#746f68]">Jam</span>
+        </div>
+        <div class="glass-card py-3 px-2 rounded-2xl border border-[#c59b6b]/30">
+          <span id="countdown-minutes" class="block font-serif-title text-2xl font-bold text-[#936c3a]">00</span>
+          <span class="text-[10px] uppercase font-semibold text-[#746f68]">Menit</span>
+        </div>
+        <div class="glass-card py-3 px-2 rounded-2xl border border-[#c59b6b]/30">
+          <span id="countdown-seconds" class="block font-serif-title text-2xl font-bold text-[#936c3a]">00</span>
+          <span class="text-[10px] uppercase font-semibold text-[#746f68]">Detik</span>
+        </div>
+      </div>
+
+      <!-- TOMBOL GOOGLE CALENDAR -->
+      <div class="text-center mb-8" data-aos="fade-up">
+        <button id="btn-save-calendar" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-[#c59b6b] bg-white text-[#936c3a] text-xs font-semibold hover:bg-[#c59b6b] hover:text-white transition-all shadow-sm">
+          <i class="fa-regular fa-calendar-plus text-sm"></i>
+          <span>Simpan ke Google Calendar</span>
+        </button>
+      </div>
+
+      <!-- JADWAL SESI ACARA -->
+      <div class="space-y-4" data-aos="fade-up">
+        <div class="glass-card p-5 rounded-2xl border-l-4 border-l-[#c59b6b]">
+          <h3 class="font-bold text-sm text-[#2c2725]">1. Syukuran & Tiup Lilin</h3>
+          <p class="text-xs text-[#936c3a] font-medium mt-1">16.00 - 18.00 WIB</p>
+          <p class="text-xs text-[#746f68] mt-1">Doa bersama, prosesi potong kue, dan tiup lilin bersama keluarga.</p>
+        </div>
+
+        <div class="glass-card p-5 rounded-2xl border-l-4 border-l-[#936c3a]">
+          <h3 class="font-bold text-sm text-[#2c2725]">2. Dinner & Acoustic Party</h3>
+          <p class="text-xs text-[#936c3a] font-medium mt-1">18.30 - 21.00 WIB</p>
+          <p class="text-xs text-[#746f68] mt-1">Makan malam santai bersama teman-teman, live music, dan games seru.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =====================================================================
+         FITUR 3: LOKASI & PETA GOOGLE MAPS
+         ===================================================================== -->
+    <section class="py-10 px-6 bg-[#f7f2ea]">
+      <div class="text-center mb-6" data-aos="fade-up">
+        <h2 class="font-serif-title text-2xl font-bold text-[#2c2725]">Lokasi Pesta</h2>
+        <div class="w-12 h-0.5 bg-[#c59b6b] mx-auto mt-2 mb-3"></div>
+        
+        <!-- ✏️ EDIT 3: GANTI NAMA TEMPAT & ALAMAT -->
+        <p class="text-xs font-bold text-[#2c2725]">Grand Garden Cafe & Resto</p>
+        <p class="text-xs text-[#5a544e] mt-1">Jl. Melati No. 45, Kebayoran Baru, Jakarta Selatan</p>
+      </div>
+
+      <!-- SEMATAN PETA (IFRAME GOOGLE MAPS) -->
+      <div class="rounded-2xl overflow-hidden shadow-md border border-[#c59b6b]/30 mb-5" data-aos="zoom-in">
+        <iframe 
+          title="Peta Lokasi"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.27364112285!2d106.79724127499042!3d-6.227606393760454!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f14f52636a0d%3A0x6735515747053e19!2sSenayan%20City!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" 
+          width="100%" 
+          height="220" 
+          style="border:0;" 
+          loading="lazy">
+        </iframe>
+      </div>
+
+      <div class="text-center" data-aos="fade-up">
+        <a href="https://maps.google.com/?q=Senayan+City+Jakarta" 
+           target="_blank" 
+           class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#c59b6b] text-white text-xs font-semibold shadow hover:bg-[#936c3a] transition-all">
+          <i class="fa-solid fa-location-arrow"></i>
+          <span>Buka di Aplikasi Google Maps</span>
+        </a>
+      </div>
+    </section>
+
+
+    <!-- =====================================================================
+         FITUR 4: GALERI FOTO (MINIMAL 4 FOTO)
+         ===================================================================== -->
+    <section class="py-10 px-6">
+      <div class="text-center mb-6" data-aos="fade-up">
+        <h2 class="font-serif-title text-2xl font-bold text-[#2c2725]">Galeri Kenangan</h2>
+        <div class="w-12 h-0.5 bg-[#c59b6b] mx-auto mt-2 mb-3"></div>
+        <p class="text-xs text-[#746f68]">Potret memori manis selama 17 tahun.</p>
+      </div>
+
+      <!-- ✏️ EDIT 4: GANTI LINK FOTO DI ATRIBUT src="..." -->
+      <div class="grid grid-cols-2 gap-3">
+        <div class="overflow-hidden rounded-2xl shadow border border-[#c59b6b]/20" data-aos="fade-right">
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=500&q=80" 
+               alt="Foto 1" class="w-full h-40 object-cover hover:scale-105 transition-transform duration-300">
+        </div>
+        <div class="overflow-hidden rounded-2xl shadow border border-[#c59b6b]/20" data-aos="fade-left">
+          <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=500&q=80" 
+               alt="Foto 2" class="w-full h-40 object-cover hover:scale-105 transition-transform duration-300">
+        </div>
+        <div class="overflow-hidden rounded-2xl shadow border border-[#c59b6b]/20" data-aos="fade-right">
+          <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=500&q=80" 
+               alt="Foto 3" class="w-full h-40 object-cover hover:scale-105 transition-transform duration-300">
+        </div>
+        <div class="overflow-hidden rounded-2xl shadow border border-[#c59b6b]/20" data-aos="fade-left">
+          <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=500&q=80" 
+               alt="Foto 4" class="w-full h-40 object-cover hover:scale-105 transition-transform duration-300">
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =====================================================================
+         FITUR 3 (LANJUTAN): AMPLOP DIGITAL & KADO
+         ===================================================================== -->
+    <section class="py-10 px-6 bg-[#f7f2ea]">
+      <div class="text-center mb-6" data-aos="fade-up">
+        <h2 class="font-serif-title text-2xl font-bold text-[#2c2725]">Kado Ulang Tahun</h2>
+        <div class="w-12 h-0.5 bg-[#c59b6b] mx-auto mt-2 mb-3"></div>
+        <p class="text-xs text-[#746f68]">Jika ingin memberikan tanda kasih secara online:</p>
+      </div>
+
+      <div class="space-y-4" data-aos="zoom-in">
+        <!-- ✏️ EDIT 5: GANTI NOMOR REKENING BCA -->
+        <div class="glass-card p-5 rounded-2xl border border-[#c59b6b]/30">
+          <p class="font-bold text-xs text-[#2c2725]">BANK BCA</p>
+          <div class="flex items-center justify-between mt-2">
+            <span class="font-mono text-base font-bold text-[#2c2725]">8720192841</span>
+            <button onclick="copyText('8720192841', 'Nomor Rekening BCA')" 
+                    class="px-3 py-1.5 rounded-lg bg-[#c59b6b]/20 text-[#936c3a] text-xs font-semibold hover:bg-[#c59b6b] hover:text-white transition-all">
+              <i class="fa-regular fa-copy mr-1"></i>Salin
+            </button>
+          </div>
+          <p class="text-xs text-gray-500 mt-1">Dias Azzahra</p>
+        </div>
+
+        <!-- ✏️ EDIT 6: GANTI NOMOR DANA -->
+        <div class="glass-card p-5 rounded-2xl border border-[#c59b6b]/30">
+          <p class="font-bold text-xs text-[#2c2725]">E-WALLET DANA</p>
+          <div class="flex items-center justify-between mt-2">
+            <span class="font-mono text-base font-bold text-[#2c2725]">081234567890</span>
+            <button onclick="copyText('081234567890', 'Nomor DANA')" 
+                    class="px-3 py-1.5 rounded-lg bg-[#c59b6b]/20 text-[#936c3a] text-xs font-semibold hover:bg-[#c59b6b] hover:text-white transition-all">
+              <i class="fa-regular fa-copy mr-1"></i>Salin
+            </button>
+          </div>
+          <p class="text-xs text-gray-500 mt-1">Dias Azzahra</p>
+        </div>
+
+        <!-- ✏️ EDIT 7: GANTI ALAMAT PENGIRIMAN KADO -->
+        <div class="glass-card p-5 rounded-2xl border border-[#c59b6b]/30">
+          <p class="font-bold text-xs text-[#2c2725] mb-1">ALAMAT KIRIM KADO</p>
+          <p class="text-xs text-gray-600 mb-3">
+            Jl. Melati Indah Blok C2 No. 12, Cilandak Barat, Jakarta Selatan (Penerima: Dias - 081234567890)
+          </p>
+          <button onclick="copyText('Jl. Melati Indah Blok C2 No. 12, Cilandak Barat, Jakarta Selatan (Penerima: Dias - 081234567890)', 'Alamat Kado')" 
+                  class="w-full py-2 rounded-xl bg-[#c59b6b]/20 text-[#936c3a] text-xs font-semibold hover:bg-[#c59b6b] hover:text-white transition-all text-center">
+            <i class="fa-regular fa-copy mr-1"></i>Salin Alamat Lengkap
+          </button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =====================================================================
+         FITUR 5: FORMULIR RSVP & BUKU TAMU PERSISTEN (LOCALSTORAGE)
+         ===================================================================== -->
+    <section class="py-10 px-6">
+      <div class="text-center mb-6" data-aos="fade-up">
+        <h2 class="font-serif-title text-2xl font-bold text-[#2c2725]">Konfirmasi Kehadiran</h2>
+        <div class="w-12 h-0.5 bg-[#c59b6b] mx-auto mt-2 mb-3"></div>
+        <p class="text-xs text-[#746f68]">Kirimkan kepastian hadir dan ucapan selamat.</p>
+      </div>
+
+      <!-- FORMULIR INPUT RSVP -->
+      <form id="rsvp-form" class="glass-card p-5 rounded-2xl border border-[#c59b6b]/30 space-y-4 mb-8" data-aos="fade-up">
+        <div>
+          <label for="rsvp-name" class="block text-xs font-semibold text-[#2c2725] mb-1">Nama Lengkap</label>
+          <input type="text" id="rsvp-name" required placeholder="Ketik nama Anda..."
+                 class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-gray-300 bg-white focus:outline-none focus:border-[#c59b6b]">
+        </div>
+
+        <div>
+          <label for="rsvp-status" class="block text-xs font-semibold text-[#2c2725] mb-1">Status Kehadiran</label>
+          <select id="rsvp-status" required
+                  class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-gray-300 bg-white focus:outline-none focus:border-[#c59b6b]">
+            <option value="" disabled selected>Pilih salah satu...</option>
+            <option value="Hadir"> Ya, Pasti Hadir</option>
+            <option value="Tidak Hadir"> Maaf, Berhalangan Hadir</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="rsvp-message" class="block text-xs font-semibold text-[#2c2725] mb-1">Ucapan & Doa</label>
+          <textarea id="rsvp-message" rows="3" required placeholder="Tuliskan ucapan ulang tahun..."
+                    class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-gray-300 bg-white focus:outline-none focus:border-[#c59b6b]"></textarea>
+        </div>
+
+        <button type="submit" 
+                class="w-full py-3 rounded-xl bg-[#c59b6b] hover:bg-[#936c3a] text-white text-xs font-bold shadow transition-all">
+          <i class="fa-solid fa-paper-plane mr-1"></i>Kirim Ucapan
+        </button>
+      </form>
+
+      <!-- DAFTAR BUKU TAMU YANG SUDAH MASUK -->
+      <div data-aos="fade-up">
+        <h3 class="font-bold text-sm text-[#2c2725] mb-3">
+          Buku Tamu (<span id="guest-count">0</span> Pesan)
+        </h3>
+        
+        <!-- Wadah yang otomatis diisi oleh script.js -->
+        <div id="wishes-container" class="space-y-3 max-h-80 overflow-y-auto">
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-8 px-6 text-center border-t border-[#c59b6b]/20 bg-[#fbf8f2]">
+      <h3 class="font-script text-3xl text-[#c59b6b]">Dias Azzahra</h3>
+      <p class="text-xs text-[#746f68] mt-1">Terima kasih atas doa dan kehadirannya!</p>
+    </footer>
+
+  </main>
+
+
+  <!-- =====================================================================
+       FITUR 6: TOMBOL MUSIK MELAYANG (FLOATING MUSIC TOGGLE)
+       ===================================================================== -->
+  <aside class="fixed bottom-6 right-6 z-40">
+    <button id="music-toggle-btn" 
+            aria-label="Putar Musik"
+            class="w-12 h-12 rounded-full bg-[#c59b6b] text-white flex items-center justify-center shadow-xl border-2 border-white hover:scale-105 active:scale-95 transition-all">
+      <i id="music-icon" class="fa-solid fa-compact-disc text-xl"></i>
+    </button>
+  </aside>
+
+  <!-- FILE AUDIO MUSIK -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- KOTAK NOTIFIKASI BERHASIL DISALIN (TOAST ALERT) -->
+  <div id="copy-toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 bg-[#2c2725] text-white px-5 py-2.5 rounded-full text-xs shadow-2xl flex items-center gap-2 border border-[#c59b6b]">
+    <i class="fa-solid fa-circle-check text-[#c59b6b]"></i>
+    <span id="toast-message">Berhasil disalin!</span>
+  </div>
+
+  <!-- SCRIPT PENDUKUNG -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
